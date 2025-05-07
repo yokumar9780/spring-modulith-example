@@ -6,7 +6,7 @@ on:
       - mkdocs.yml
       - docs/**
     branches:
-      - main # or 'master' if you're using that
+      - master
 
 permissions:
   contents: write # Required to push to gh-pages
