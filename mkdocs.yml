@@ -1,0 +1,78 @@
+site_name: Spring Modulith Example Documentation
+nav:
+  - Architecture:
+      - Overview: architecture/overview.md
+      - Component Interaction: architecture/component-interaction.md
+  - Infrastructure:
+      - Deployment: infrastructure/deployment.md
+      - CI/CD: infrastructure/cicd.md
+      - Monitoring: infrastructure/monitoring.md
+      - Logging: infrastructure/logging.md
+      - Cloud Services: infrastructure/cloud-services.md
+  - Setup:
+      - Local Development: setup/local-development.md
+      - Environment Configuration: setup/environment-configuration.md
+      - Installation Steps: setup/installation-steps.md
+  - Tech Stack:
+      - Tools and Frameworks: techstack/tools-and-frameworks.md
+      - Libraries and Versions: techstack/libraries-and-versions.md
+  - Components:
+      - Gateway Service:
+          - Overview: components/gatewayservice/overview.md
+          - API: components/gatewayservice/api.md
+      - Job Service:
+          - Overview: components/jobservice/overview.md
+          - API: components/jobservice/api.md
+          - Models: components/jobservice/models.md
+      - Notification Service:
+          - Overview: components/notificationservice/overview.md
+          - Event Handlers: components/notificationservice/event-handlers.md
+      - Shared:
+          - Config: components/shared/config.md
+          - Models: components/shared/models.md
+          - Events: components/shared/events.md
+      - User Service:
+          - Overview: components/userservice/overview.md
+          - API: components/userservice/api.md
+          - Scheduled Jobs: components/userservice/scheduled-jobs.md
+          - Models: components/userservice/models.md
+          - Event Handlers: components/userservice/event-handlers.md
+
+theme:
+  features:
+    - navigation.tabs
+    - navigation.prune
+    - navigation.sections
+
+  name: material
+  palette:
+    primary: black
+  icon:
+    repo: fontawesome/brands/github
+  font:
+    code: Ubuntu Condensed
+    text: Ubuntu Condensed
+extra:
+  version:
+    provider: mike
+    default: stable
+
+  social:
+    - icon: fontawesome/solid/paper-plane
+      link: mailto:yokum.9780@gmail.com
+      name: yogesh
+
+
+repo_url: https://github.com/yokumar9780/spring-modulith-example
+repo_name: yokumar9780/spring-modulith-example
+
+plugins:
+  - search
+  - mike
+  - git-revision-date-localized:
+      enable_creation_date: true
+#
+  - git-committers:
+      repository: yokumar9780/spring-modulith-example
+      branch: master
+      enable_creation_date: true

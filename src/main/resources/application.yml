@@ -1,0 +1,93 @@
+spring:
+  docker:
+    compose:
+      lifecycle-management: start_only
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: user-service
+            uri: http://localhost:8080
+            predicates:
+              - Path=/api/users/**
+            filters:
+              - AddRequestHeader=X-Service, UserService
+              #- RequestRateLimiter=key-resolver=#{@keyResolver}
+              - RewritePath=/api/users/(?<segment>.*), /${segment}
+          - id: job-service
+            uri: http://localhost:8080
+            predicates:
+              - Path=/api/jobs/**
+            filters:
+              - AddRequestHeader=X-Service, JobService
+              - RewritePath=/api/jobs/(?<segment>.*), /${segment}
+          - id: notification-service
+            uri: http://localhost:8080
+            predicates:
+              - Path=/api/notifications/**
+            filters:
+              - AddRequestHeader=X-Service, NotificationService
+              - RewritePath=/api/notifications/(?<segment>.*), /${segment}
+
+
+  application:
+    name: spring-modulith-example
+  datasource:
+    url: jdbc:postgresql://localhost:5432/spring-modulith
+    username: dev_user
+    password: dev_password
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      auto-commit: true
+      # The name of the Hikari connection pool
+      pool-name: HikariPool-1
+      # The maximum amount of time a connection can sit idle in the pool
+      idle-timeout: 30000
+      # The maximum lifetime of a connection in the pool
+      max-lifetime: 1800000
+      # The maximum time to wait for a connection from the pool
+      connection-timeout: 30000
+  jpa:
+    hibernate:
+      # Specifies the action to take with the database schema (e.g., update, validate, create-drop)
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  modulith:
+    events:
+      republish-outstanding-events-on-restart: true
+  threads:
+    virtual:
+      enabled: true
+
+jobs:
+  daily-notifications:
+    cron: "0 0 12 * * ?" # Cron expression for daily execution at 12:00 PM
+
+# Logging configuration
+logging:
+  level:
+    root: INFO
+    com.example.gatewayservice: DEBUG
+    com.example.jobservice: DEBUG
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.web: INFO
+    org.apache.coyote.http11: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: logs/spring-modulith-example.log
+
+# Actuator endpoints for monitoring
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,gateway
+  endpoint:
+    health:
+      show-details: always
