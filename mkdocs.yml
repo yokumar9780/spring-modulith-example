@@ -38,8 +38,6 @@ nav:
           - Models: components/userservice/models.md
           - Event Handlers: components/userservice/event-handlers.md
 
-
-
 theme:
   features:
     - navigation.tabs
@@ -76,6 +74,6 @@ plugins:
   - git-committers:
       repository: yokumar9780/spring-modulith-example
       branch: master
-      enable_creation_date: true
+
   - git-authors
   - awesome-pages
