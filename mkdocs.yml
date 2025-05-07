@@ -71,7 +71,6 @@ plugins:
   - mike
   - git-revision-date-localized:
       enable_creation_date: true
-#
   - git-committers:
       repository: yokumar9780/spring-modulith-example
       branch: master
