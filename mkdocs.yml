@@ -76,3 +76,5 @@ plugins:
       repository: yokumar9780/spring-modulith-example
       branch: master
       enable_creation_date: true
+  - git-authors
+  - awesome-pages
